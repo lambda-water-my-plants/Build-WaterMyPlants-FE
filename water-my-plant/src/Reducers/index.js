@@ -1,4 +1,0 @@
-import {
-  LOGIN_START,
-  LOGIN_SUCCESS,
-}

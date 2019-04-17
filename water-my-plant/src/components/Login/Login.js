@@ -3,14 +3,12 @@ import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import axios from 'axios';
 
-class Register extends React.Component {
+class Login extends React.Component {
   constructor() {
       super();
       this.state = {
           username: '',
           password: '',
-          email: '',
-          cell: ''
       };
   }
   handleInput = event => {
@@ -19,15 +17,14 @@ class Register extends React.Component {
   handlePassword = e => {
      e.preventDefault();
       axios
-          .post('https://watermyplantsbe.herokuapp.com/api/register', this.state)
+          .post('https://watermyplantsbe.herokuapp.com/api/login', this.state)
           .then(res => {
             localStorage.setItem("token", res.data.token);
             this.props.history.push(`/lists`);
          })
          .catch(err => console.log(err))
+
     }
-
-
 
   render(){
     return(
@@ -36,7 +33,7 @@ class Register extends React.Component {
               <input
                   className ='input-form'
                   type="text"
-                  placeholder="username"
+                  placeholder="username or email"
                   name="username"
                   value={this.state.username}
                   onChange={this.handleInput}
@@ -49,31 +46,15 @@ class Register extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInput}
               />
-              <input
-                  className ='input-form'
-                  type= 'email'
-                  placeholder= 'Email'
-                  name='email'
-                  value={this.state.email}
-                  onChange={this.handleInput}
-              />
-              <input
-                  className ='input-form'
-                  type= 'text'
-                  placeholder= 'Cell'
-                  name='cell'
-                  value={this.state.cell}
-                  onChange={this.handleInput}
-              />
 
-              <Button color = 'success' onClick={this.handlePassword}>Sign Up</Button>
+              <Button color = 'success' onClick={this.handlePassword}>Log in</Button>
           </Form>
       </LoginBar>
     );
   }
 }
 
-export default Register;
+export default Login;
 
 const LoginBar = styled.div`
       display : flex;
@@ -134,33 +115,19 @@ const LoginBar = styled.div`
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // import React from 'react'
+// import axios from 'axios'
 //
-// class Register extends React.Component {
+// class Login extends React.Component {
 //   constructor(props){
 //     super(props);
 //     this.state = {
 //       userInput: '',
-//       passInput: '',
-//       emailInput: '',
-//       numberInput: '',
+//       passInput: ''
 //     };
 //
 //     this.handleInputChange = this.handleInputChange.bind(this);
 //     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-//     this.handleEmailChange = this.handleEmailChange.bind(this);
 //   }
 //
 //   handleInputChange(event) {
@@ -175,50 +142,41 @@ const LoginBar = styled.div`
 //     })
 //   }
 //
-//   handleEmailChange(event) {
-//     this.setState({
-//       passInput: event.target.value
-//     })
-//   }
-//
-//   handleSubmit(event){
-//     alert('A user as logged in' + this.state.userInput);
-//     event.preventDafault();
-//   }
-//
+//   handleSubmit = e => {
+//        e.preventDefault();
+//         axios
+//             .post('https://watermyplantsbe.herokuapp.com/api/login', this.state)
+//             .then(res => {
+//               localStorage.setItem("token", res.data.token);
+//            })
+//            .catch(err => console.log(err))
+//       }
 //
 //   render(){
 //     return(
-//       <div>
-//       <form className ='input-form' onSubmit={this.addTodo}>
-//         <input
-//           className ='inputbox'
-//           onChange={this.handleInputChange}
-//           placeholder="Username"
-//           value={this.state.title}
-//           name="title"
-//         />
-//         <input
-//           className ='inputbox'
-//           onChange={this.handleInputChange}
-//           placeholder="Password"
-//           value={this.state.description}
-//           name="description"
-//           type="password"
-//         />
-//         <input
-//           className ='inputbox'
-//           onChange={this.handleInputChange}
-//           placeholder="Email"
-//           value={this.state.description}
-//           name="description"
-//           type="email"
-//         />
-//         <button className='button' type="submit">Login</button>
-//       </form>
+//       <div >
+//         <form className='input-form' onSubmit={this.handleSubmit}>
+//           <input
+//             className ='inputbox'
+//             onChange={this.handleInputChange}
+//             placeholder="Username"
+//             value={this.state.userInput}
+//             name="username"
+//           />
+//           <input
+//             className ='inputbox'
+//             onChange={this.handlePasswordChange}
+//             placeholder="Password"
+//             value={this.state.passInput}
+//             name="password"
+//             type="password"
+//           />
+//           <button className='button' type="submit">Login</button>
+//         </form>
 //       </div>
-//     );
+//     )
 //   }
 // }
 //
-// export default Register;
+//
+// export default Login;
