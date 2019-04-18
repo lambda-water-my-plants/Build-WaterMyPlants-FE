@@ -26,7 +26,18 @@ class Board extends React.Component {
        })
    })
    .catch(err => console.log(err))
+ }
 
+ addPlant = event => {
+   event.preventDafault();
+
+   this.props.plants(res.data);
+
+   this.setState({
+     name: '',
+     description:''
+   });
+   axios.post(`https://watermyplantsbe.herokuapp.com/api/users/${id}/plants`)
  }
 
   render(){
@@ -36,7 +47,6 @@ class Board extends React.Component {
       <div className="dashboard">
         <h1> Dashboard </h1>
         <h2> WELCOME</h2>
-
         <div>{this.state.plants.map((plant) => (
           <div>
             <p>Plant Name: {plant.name}</p>
@@ -44,6 +54,7 @@ class Board extends React.Component {
             <p>Water plant: {plant.last_water}</p>
           </div>
         ))}</div>
+        <button> Update </button>
       </div>
     )
   }
