@@ -7,9 +7,6 @@ import {Route, Link} from 'react-router-dom';
 
 class App extends Component {
 
-  //functions to add, delete, update functions
-
-
    componentDidMount(){
     var token = localStorage.getItem(`token`)
     var request = {
@@ -24,12 +21,9 @@ class App extends Component {
     .catch(err => console.log(err))
   }
 
-
-
-
   render() {
     return (
-    
+
       <div className="App">
         <Navbar />
         <div>
