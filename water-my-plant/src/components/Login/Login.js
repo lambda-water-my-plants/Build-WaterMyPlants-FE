@@ -5,8 +5,8 @@ import axios from 'axios';
 import './Login.css';
 
 class Login extends React.Component {
-  constructor() {
-      super();
+  constructor(props) {
+      super(props);
       this.state = {
           username: '',
           password: '',
@@ -20,11 +20,12 @@ class Login extends React.Component {
       axios
           .post('https://watermyplantsbe.herokuapp.com/api/login', this.state)
           .then(res => {
+            console.log('login', res.data)
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("id", res.data.id)
             this.props.history.push(`/lists`);
          })
          .catch(err => console.log(err))
-
     }
 
   render(){

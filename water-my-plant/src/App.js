@@ -3,6 +3,7 @@ import './App.css';
 import Form from './components/Form/Form';
 import axios from 'axios';
 import Navbar from './components/Nav/Navigation';
+import {Route, Link} from 'react-router-dom';
 
 class App extends Component {
 
@@ -23,11 +24,15 @@ class App extends Component {
     .catch(err => console.log(err))
   }
 
+
+
+
   render() {
     return (
+    
       <div className="App">
         <Navbar />
-        <div className="Form">
+        <div>
           < Form />
         </div>
       </div>

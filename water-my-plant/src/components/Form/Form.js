@@ -3,6 +3,8 @@ import Register from '../Register/Register'
 import {Route, Link} from 'react-router-dom';
 import Login from '../Login/Login';
 import './Form.css';
+import Board from '../Dashboard/Board';
+
 
 class Form extends React.Component {
   constructor(props){
@@ -15,20 +17,12 @@ class Form extends React.Component {
   render(){
     return(
       <Route>
-        <div>
+        <div className="form">
         <h1> Water My Plants</h1>
-          <ul>
-            <li>
-              <Link to="/">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </ul>
-
-          <Route path="/" exact component={Login} />
+          <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
         </div>
+        <Route path="/dashboard" exact component={Board}/>
       </Route>
     )
   }
