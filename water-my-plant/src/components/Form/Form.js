@@ -4,8 +4,6 @@ import {Route, Link} from 'react-router-dom';
 import Login from '../Login/Login';
 import './Form.css';
 
-
-
 class Form extends React.Component {
   constructor(props){
     super(props);
