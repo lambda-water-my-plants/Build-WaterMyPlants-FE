@@ -1,0 +1,4 @@
+[build]
+base = "water-my-plant/"
+publish = "water-my-plant/build/"
+command = "yarn build"

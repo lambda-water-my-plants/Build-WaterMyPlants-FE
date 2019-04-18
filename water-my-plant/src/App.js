@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Form from './components/Form/Form';
-import {Route, Link} from 'react-router-dom';
 import axios from 'axios';
+import Navbar from './components/Nav/Navigation';
 
 class App extends Component {
 
@@ -26,6 +26,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navbar />
         <div className="Form">
           < Form />
         </div>
