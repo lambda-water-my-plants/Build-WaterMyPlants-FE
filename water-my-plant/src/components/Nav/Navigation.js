@@ -14,6 +14,7 @@ const Navbar = () => {
         <Route path="/dashboard" exact component={Board}/> 
     </div>
   )
+  
 }
 
 export default Navbar;

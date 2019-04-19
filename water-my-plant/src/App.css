@@ -1,11 +1,65 @@
+/* Form Styles */
+
 .Form {
-  border: 5px solid red;
   height: 500px;
   width: 400px;
+  background-color: #3CCB59;
+  border-radius: 10px;
+  border: 2px solid #248230;
+  box-shadow: 1px 2px ##248230;
   margin: 0 auto;
   margin-top: 150px;
   text-align: center;
 }
+
+/* Form Heading */
+
+.Form h1 {
+  color: #FFF;
+  margin: 2rem 0;
+}
+
+/* Form Buttons */
+
+.Form ul {
+  margin: 2rem 0;
+}
+
+.Form li {
+  width: 150px;
+  height: 40px;
+  background-color: #3CCB59;
+  border-radius: 10px;
+  border: 1px solid #FFF;
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Form li a {
+  color: #FFF;
+}
+
+.App {
+  background-color: red;
+}
+
+/* Form Fields */
+
+.User, .Pass {
+  margin: 0.75rem 0;
+}
+
+.login-form button {
+  width: 70%;
+  margin: 0.75rem 0;
+}
+
+
+
+ /* Keyframes */
 
 @keyframes App-logo-spin {
   from {
