@@ -33,7 +33,7 @@ class Register extends React.Component {
     return(
           <Form  onSubmit={this.handlePassword} className ='login-form'>
               <input
-                  className ='input'
+                  className='input'
                   type="text"
                   placeholder="username"
                   name="username"

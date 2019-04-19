@@ -8,5 +8,5 @@ export default () => {
       'Content-Type': 'application/json',
       Authorization: `${token}`
     }
-  });  
+  });
 }
