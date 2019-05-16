@@ -1,7 +1,9 @@
 import React from 'react';
-import Register from '../Register/Register'
 import {Route, Link} from 'react-router-dom';
+import Register from '../Register/Register'
 import Login from '../Login/Login';
+import Board from '../Dashboard/Board';
+import Plant from '../Plant/Plant';
 import './Form.css';
 
 class Form extends React.Component {
@@ -14,22 +16,7 @@ class Form extends React.Component {
 
   render(){
     return(
-      <Route>
-        <div>
-        <h1> Water My Plants</h1>
-          <ul>
-            <li>
-              <Link to="/">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </ul>
-
-          <Route path="/" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-        </div>
-      </Route>
+      <div></div>
     )
   }
 

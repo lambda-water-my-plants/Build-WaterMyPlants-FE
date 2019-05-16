@@ -1,15 +1,18 @@
-
-div ul {
+.form {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 70px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border: 5px solid #FEAC88;
+  padding: 20px;
+  background-color: #579C87;
 }
 
-li {
-  list-style-type: none;
-  border: 1px solid green;
-  width: 40%;
-  height: 25px;
-  margin: auto;
-  margin-right: 40px;
-}
+
+/* @ivory: #FCF9F4;
+@slate: #233D4D;
+@soft-teal: #579C87;
+@soft-green: #A1C181;
+@light-coral: #FEAC88; */

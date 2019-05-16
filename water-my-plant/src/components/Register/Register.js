@@ -11,7 +11,7 @@ class Register extends React.Component {
           username: '',
           password: '',
           email: '',
-          cell: ''
+          phone: ''
       };
   }
   handleInput = event => {
@@ -22,8 +22,7 @@ class Register extends React.Component {
       axios
           .post('https://watermyplantsbe.herokuapp.com/api/register', this.state)
           .then(res => {
-            localStorage.setItem("token", res.data.token);
-            this.props.history.push(`/lists`);
+            this.props.history.push(`/login`);
          })
          .catch(err => console.log(err))
     }
@@ -34,7 +33,7 @@ class Register extends React.Component {
     return(
           <Form  onSubmit={this.handlePassword} className ='login-form'>
               <input
-                  className ='input-form'
+                  className='input'
                   type="text"
                   placeholder="username"
                   name="username"
@@ -42,7 +41,7 @@ class Register extends React.Component {
                   onChange={this.handleInput}
               />
               <input
-                  className ='input-form'
+                  className ='input'
                   type= 'password'
                   placeholder= 'Password'
                   name='password'
@@ -50,7 +49,7 @@ class Register extends React.Component {
                   onChange={this.handleInput}
               />
               <input
-                  className ='input-form'
+                  className ='input'
                   type= 'email'
                   placeholder= 'Email'
                   name='email'
@@ -58,15 +57,15 @@ class Register extends React.Component {
                   onChange={this.handleInput}
               />
               <input
-                  className ='input-form'
+                  className ='input'
                   type= 'text'
-                  placeholder= 'Cell'
-                  name='cell'
-                  value={this.state.cell}
+                  placeholder= 'Phone'
+                  name='phone'
+                  value={this.state.phone}
                   onChange={this.handleInput}
               />
 
-              <Button color = 'success' onClick={this.handlePassword}>Sign Up</Button>
+              <Button className="btn" color = 'success' onClick={this.handlePassword}>Sign Up</Button>
           </Form>
     );
   }

@@ -1,0 +1,11 @@
+.input , .btn {
+  width: 70%;
+  height: 60px;
+  text-align: center;
+  font-size: 100%;
+  margin-top: 20px;
+}
+
+.btn {
+  border-radius: 25px;
+}

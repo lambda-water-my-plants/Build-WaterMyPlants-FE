@@ -3,12 +3,15 @@ import './App.css';
 import Form from './components/Form/Form';
 import axios from 'axios';
 import Navbar from './components/Nav/Navigation';
+import Register from './components/Register/Register'
+import Login from './components/Login/Login';
+import Board from './components/Dashboard/Board';
+import Plant from './components/Plant/Plant';
+import PrivateRoute from './components/Login/PrivateRoute';
+import {Route, Link} from 'react-router-dom';
+
 
 class App extends Component {
-
-  //functions to add, delete, update functions
-
-
    componentDidMount(){
     var token = localStorage.getItem(`token`)
     var request = {
@@ -25,11 +28,19 @@ class App extends Component {
 
   render() {
     return (
+
       <div className="App">
-        <Navbar />
-        <div className="Form">
-          < Form />
+      <Navbar />
+      <Route>
+        <div className="form">
+        <h1> Water My Plants</h1>
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
         </div>
+        <PrivateRoute path="/dashboard" exact component={Board}/>
+        <Route path="/plant" exact component={Plant}/>
+
+      </Route>
       </div>
     );
   }
