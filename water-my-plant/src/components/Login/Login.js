@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import axios from 'axios';
-import './Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -17,21 +16,26 @@ class Login extends React.Component {
   };
   handlePassword = e => {
      e.preventDefault();
+     try{
       axios
           .post('https://watermyplantsbe.herokuapp.com/api/login', this.state)
           .then(res => {
             localStorage.setItem("token", res.data.token);
-            this.props.history.push(`/lists`);
+            localStorage.setItem("id", res.data.id);
+            console.log("You successfully Logged in");
          })
-         .catch(err => console.log(err))
-
+    } catch(err) {
+      console.log({Error: err})
     }
+  }
 
   render(){
     return(
-          <Form  onSubmit={this.handlePassword} className ='login-form'>
+        <FormWrapper>
+          <UserBar>
+            <Form  onSubmit={this.handlePassword} className ='loginform'>
               <input
-                  className ='User'
+                  className ='input'
                   type="text"
                   placeholder="username or email"
                   name="username"
@@ -39,7 +43,7 @@ class Login extends React.Component {
                   onChange={this.handleInput}
               />
               <input
-                  className ='Pass'
+                  className ='input'
                   type= 'password'
                   placeholder= 'Password'
                   name='password'
@@ -47,8 +51,10 @@ class Login extends React.Component {
                   onChange={this.handleInput}
               />
 
-              <Button color = 'success' onClick={this.handlePassword}>Log in</Button>
-          </Form>
+              <Button className= "input" onClick={this.handlePassword}>Log in</Button>
+            </Form>
+          </UserBar>
+       </FormWrapper>
 
     );
   }
@@ -56,70 +62,44 @@ class Login extends React.Component {
 
 export default Login;
 
-
-
-// import React from 'react'
-// import axios from 'axios'
-//
-// class Login extends React.Component {
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       userInput: '',
-//       passInput: ''
-//     };
-//
-//     this.handleInputChange = this.handleInputChange.bind(this);
-//     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-//   }
-//
-//   handleInputChange(event) {
-//     this.setState({
-//       userInput: event.target.value,
-//     })
-//   }
-//
-//   handlePasswordChange(event) {
-//     this.setState({
-//       passInput: event.target.value
-//     })
-//   }
-//
-//   handleSubmit = e => {
-//        e.preventDefault();
-//         axios
-//             .post('https://watermyplantsbe.herokuapp.com/api/login', this.state)
-//             .then(res => {
-//               localStorage.setItem("token", res.data.token);
-//            })
-//            .catch(err => console.log(err))
-//       }
-//
-//   render(){
-//     return(
-//       <div >
-//         <form className='input-form' onSubmit={this.handleSubmit}>
-//           <input
-//             className ='inputbox'
-//             onChange={this.handleInputChange}
-//             placeholder="Username"
-//             value={this.state.userInput}
-//             name="username"
-//           />
-//           <input
-//             className ='inputbox'
-//             onChange={this.handlePasswordChange}
-//             placeholder="Password"
-//             value={this.state.passInput}
-//             name="password"
-//             type="password"
-//           />
-//           <button className='button' type="submit">Login</button>
-//         </form>
-//       </div>
-//     )
-//   }
-// }
-//
-//
-// export default Login;
+const FormWrapper =styled.div`
+      width: 100%;
+      height: 100%;
+`
+const UserBar = styled.div`
+    box-shadow: 0px 4px 4px #007DA6;
+    text-align : center;
+    width: 400px;
+    border-radius: 5px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin: 50px auto;
+    .input{
+          margin: 5px;
+          height: 25px;
+          width : 300px;
+          border-radius: 5px;
+          border: none;
+          box-shadow: 0 2px 4px #272727;
+          text-align:center;
+          @media(max-width: 479px){
+              width: 250px;
+          }
+    }
+      button{
+        background-color: #009FB7;
+        border-radius: 5px;
+        color : white;
+        margin: 10px;
+        height: 30px;
+        border: none;       
+      }
+      button:hover{
+          box-shadow: 0 2px 4px #272727;
+          transform: scaleX(1.025) scaleY(1.025);
+          cursor : pointer;
+          transition: all 0.2s;
+      }
+      }
+    }
+  `

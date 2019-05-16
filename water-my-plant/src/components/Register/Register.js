@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import axios from 'axios';
-import './Register.css';
 
 class Register extends React.Component {
   constructor() {
@@ -11,7 +10,7 @@ class Register extends React.Component {
           username: '',
           password: '',
           email: '',
-          cell: ''
+          phone: ''
       };
   }
   handleInput = event => {
@@ -19,22 +18,29 @@ class Register extends React.Component {
   };
   handlePassword = e => {
      e.preventDefault();
+     console.log("I am ")
+     try{
       axios
           .post('https://watermyplantsbe.herokuapp.com/api/register', this.state)
           .then(res => {
-            localStorage.setItem("token", res.data.token);
-            this.props.history.push(`/lists`);
+            console.log(res);
+            console.log("You successfully Registered in");
+            this.props.history.push('/login');
          })
-         .catch(err => console.log(err))
+        }catch(err){
+          console.log(err)
+        }
     }
 
 
 
   render(){
     return(
+      <FormWrapper>
+        <UserBar>
           <Form  onSubmit={this.handlePassword} className ='login-form'>
               <input
-                  className ='input-form'
+                  className ='input'
                   type="text"
                   placeholder="username"
                   name="username"
@@ -42,7 +48,7 @@ class Register extends React.Component {
                   onChange={this.handleInput}
               />
               <input
-                  className ='input-form'
+                  className ='input'
                   type= 'password'
                   placeholder= 'Password'
                   name='password'
@@ -50,7 +56,7 @@ class Register extends React.Component {
                   onChange={this.handleInput}
               />
               <input
-                  className ='input-form'
+                  className ='input'
                   type= 'email'
                   placeholder= 'Email'
                   name='email'
@@ -58,120 +64,61 @@ class Register extends React.Component {
                   onChange={this.handleInput}
               />
               <input
-                  className ='input-form'
+                  className ='input'
                   type= 'text'
-                  placeholder= 'Cell'
-                  name='cell'
-                  value={this.state.cell}
+                  placeholder= 'Phone'
+                  name='phone'
+                  value={this.state.phone}
                   onChange={this.handleInput}
               />
-
-              <Button color = 'success' onClick={this.handlePassword}>Sign Up</Button>
+              <Button className ='input' color = 'success' onClick={this.handlePassword}>Sign Up</Button>
           </Form>
+        </UserBar>
+      </FormWrapper>
     );
   }
 }
 
 export default Register;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react'
-//
-// class Register extends React.Component {
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       userInput: '',
-//       passInput: '',
-//       emailInput: '',
-//       numberInput: '',
-//     };
-//
-//     this.handleInputChange = this.handleInputChange.bind(this);
-//     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-//     this.handleEmailChange = this.handleEmailChange.bind(this);
-//   }
-//
-//   handleInputChange(event) {
-//     this.setState({
-//       userInput: event.target.value,
-//     })
-//   }
-//
-//   handlePasswordChange(event) {
-//     this.setState({
-//       passInput: event.target.value
-//     })
-//   }
-//
-//   handleEmailChange(event) {
-//     this.setState({
-//       passInput: event.target.value
-//     })
-//   }
-//
-//   handleSubmit(event){
-//     alert('A user as logged in' + this.state.userInput);
-//     event.preventDafault();
-//   }
-//
-//
-//   render(){
-//     return(
-//       <div>
-//       <form className ='input-form' onSubmit={this.addTodo}>
-//         <input
-//           className ='inputbox'
-//           onChange={this.handleInputChange}
-//           placeholder="Username"
-//           value={this.state.title}
-//           name="title"
-//         />
-//         <input
-//           className ='inputbox'
-//           onChange={this.handleInputChange}
-//           placeholder="Password"
-//           value={this.state.description}
-//           name="description"
-//           type="password"
-//         />
-//         <input
-//           className ='inputbox'
-//           onChange={this.handleInputChange}
-//           placeholder="Email"
-//           value={this.state.description}
-//           name="description"
-//           type="email"
-//         />
-//         <button className='button' type="submit">Login</button>
-//       </form>
-//       </div>
-//     );
-//   }
-// }
-//
-// export default Register;
+const FormWrapper =styled.div`
+      width: 100%;
+      height: 100%;
+`
+const UserBar = styled.div`
+    box-shadow: 0px 4px 4px #007DA6;
+    text-align : center;
+    width: 400px;
+    border-radius: 5px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin: 50px auto;
+    .input{
+          margin: 5px;
+          height: 25px;
+          width : 300px;
+          border-radius: 5px;
+          border: none;
+          box-shadow: 0 2px 4px #272727;
+          text-align:center;
+          @media(max-width: 479px){
+              width: 250px;
+          }
+    }
+      button{
+        background-color: #009FB7;
+        border-radius: 5px;
+        color : white;
+        margin: 10px;
+        height: 30px;
+        border: none;       
+      }
+      button:hover{
+          box-shadow: 0 2px 4px #272727;
+          transform: scaleX(1.025) scaleY(1.025);
+          cursor : pointer;
+          transition: all 0.2s;
+      }
+      }
+    }
+  `
