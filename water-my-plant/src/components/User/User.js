@@ -47,8 +47,7 @@ class User extends React.Component {
                     this.setState({ username: res.data.username, email: res.data.email, phone: res.data.phone, password: res.data.password })
                     alert("Your Update Submitted Successfully");
                     console.log(res.data.phone);
-                    this.props.history.push('/home');
-                    window.location.reload(true);
+                    this.props.history.push('/myplants');
                 })
         } catch (err) {
             console.log(err);

@@ -9,6 +9,8 @@ class Plants extends React.Component {
       this.state = {
           name: '',
           description: '',
+          last_water: '',
+          schedule: [],
       };
   }
   handleInput = event => {
@@ -50,6 +52,22 @@ class Plants extends React.Component {
                   placeholder= 'description'
                   name='description'
                   value={this.state.description}
+                  onChange={this.handleInput}
+              />
+              <input
+                  className ='input'
+                  type= 'text'
+                  placeholder= 'Last water'
+                  name='last_water'
+                  value={this.state.last_water}
+                  onChange={this.handleInput}
+              />
+              <input
+                  className ='input'
+                  type= 'text'
+                  placeholder= 'Schedule'
+                  name='schedule'
+                  value={this.state.schedule}
                   onChange={this.handleInput}
               />
 

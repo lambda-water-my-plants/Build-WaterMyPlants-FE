@@ -4,8 +4,8 @@ import { Button, Form } from 'reactstrap';
 import axios from 'axios';
 
 class Login extends React.Component {
-  constructor() {
-      super();
+  constructor(props) {
+      super(props);
       this.state = {
           username: '',
           password: '',
@@ -23,7 +23,8 @@ class Login extends React.Component {
           .then(res => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("id", res.data.id);
-            console.log("You successfully Logged in");
+            alert("You successfully Logged in");
+            this.props.history.push('/myplants');
          })
     } catch(err) {
       console.log({Error: err})
