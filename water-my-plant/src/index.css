@@ -2,6 +2,8 @@
 
 html, body, .app, #root {
   min-height: 100vh;
+  background: #007a4f;
+  /* background: #930050; */
 }
 
 body {

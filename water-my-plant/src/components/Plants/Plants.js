@@ -3,81 +3,84 @@ import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import axios from 'axios';
 
-class Register extends React.Component {
-  constructor() {
-      super();
+class Plants extends React.Component {
+  constructor(props) {
+      super(props);
       this.state = {
-          username: '',
-          password: '',
-          email: '',
-          phone: ''
+          name: '',
+          description: '',
+          last_water: '',
+          schedule: [],
       };
   }
   handleInput = event => {
     this.setState({ [event.target.name]: event.target.value })
   };
-  handlePassword = e => {
+  handlePlantForm = e => {
      e.preventDefault();
+     const id = localStorage.getItem(`id`)
      try{
-       const localurl = `http://localhost:5000/api/register`
+       const localurl = `http://localhost:5000/api/plants/${id}/plant`
       axios
-          .post('https://watermyplantsbe.herokuapp.com/api/register' || localurl, this.state)
+          .post(`https://watermyplantsbe.herokuapp.com/api/plants/${id}/plant` || localurl, this.state, { headers: { Authorization: localStorage.getItem("token") }})
           .then(res => {
-            console.log(res);
-            console.log("You successfully Registered in");
-            this.props.history.push('/login');
+            localStorage.setItem("plantid", res.data.id);
+            alert("You successfully Added your Plant");
+            this.props.history.push('/myplants');
          })
-        }catch(err){
-          console.log(err)
-        }
+    } catch(err) {
+      console.log({Error: err})
     }
+  }
 
   render(){
     return(
-      <FormWrapper>
-        <UserBar>
-          <Form  onSubmit={this.handlePassword} className ='login-form'>
+        <FormWrapper>
+          <UserBar>
+            <Form  onSubmit={this.handlePlantForm} className ='loginform'>
               <input
                   className ='input'
                   type="text"
-                  placeholder="username"
-                  name="username"
-                  value={this.state.username}
-                  onChange={this.handleInput}
-              />
-              <input
-                  className ='input'
-                  type= 'password'
-                  placeholder= 'Password'
-                  name='password'
-                  value={this.state.password}
-                  onChange={this.handleInput}
-              />
-              <input
-                  className ='input'
-                  type= 'email'
-                  placeholder= 'Email'
-                  name='email'
-                  value={this.state.email}
+                  placeholder=" Name of the Plant"
+                  name="name"
+                  value={this.state.name}
                   onChange={this.handleInput}
               />
               <input
                   className ='input'
                   type= 'text'
-                  placeholder= 'Phone'
-                  name='phone'
-                  value={this.state.phone}
+                  placeholder= 'description'
+                  name='description'
+                  value={this.state.description}
                   onChange={this.handleInput}
               />
-              <Button className ='input' color = 'success' onClick={this.handlePassword}>Sign Up</Button>
-          </Form>
-        </UserBar>
-      </FormWrapper>
+              <input
+                  className ='input'
+                  type= 'text'
+                  placeholder= 'Last water'
+                  name='last_water'
+                  value={this.state.last_water}
+                  onChange={this.handleInput}
+              />
+              <input
+                  className ='input'
+                  type= 'text'
+                  placeholder= 'Schedule'
+                  name='schedule'
+                  value={this.state.schedule}
+                  onChange={this.handleInput}
+              />
+
+              <Button className= "input" onClick={this.handlePlantForm}>Add to my Plant List</Button>
+            </Form>
+          </UserBar>
+       </FormWrapper>
+
     );
   }
 }
 
-export default Register;
+export default Plants;
 
 const FormWrapper =styled.div`
       width: 100%;
@@ -97,7 +100,7 @@ const UserBar = styled.div`
           width : 300px;
           border-radius: 5px;
           border: none;
-          box-shadow: 0 2px 4px purple;
+          box-shadow: 0 2px 4px #272727;
           text-align:center;
           @media(max-width: 479px){
               width: 250px;

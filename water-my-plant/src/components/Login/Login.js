@@ -4,8 +4,8 @@ import { Button, Form } from 'reactstrap';
 import axios from 'axios';
 
 class Login extends React.Component {
-  constructor() {
-      super();
+  constructor(props) {
+      super(props);
       this.state = {
           username: '',
           password: '',
@@ -17,12 +17,14 @@ class Login extends React.Component {
   handlePassword = e => {
      e.preventDefault();
      try{
+       const localurl = `http://localhost:5000/api/login`
       axios
-          .post('https://watermyplantsbe.herokuapp.com/api/login', this.state)
+          .post('https://watermyplantsbe.herokuapp.com/api/login' || localurl, this.state)
           .then(res => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("id", res.data.id);
-            console.log("You successfully Logged in");
+            alert("You successfully Logged in");
+            this.props.history.push('/myplants');
          })
     } catch(err) {
       console.log({Error: err})
@@ -67,7 +69,7 @@ const FormWrapper =styled.div`
       height: 100%;
 `
 const UserBar = styled.div`
-    box-shadow: 0px 4px 4px #007DA6;
+    box-shadow: 0px 2px 2px purple;
     text-align : center;
     width: 400px;
     border-radius: 5px;
