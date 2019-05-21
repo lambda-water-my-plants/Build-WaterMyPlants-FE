@@ -54,7 +54,8 @@ class App extends Component {
                 <button className="dropbtn"> Menu</button>
                 <div className="dropdown-content">
                   <Link to='/myprofile'> My Profile</Link>
-                  <Button className="update" onClick={this.takeMetoUpdate}> Update Profile </Button>
+                  <Link to='/updateuser'> Update Profile </Link>
+                  {/* <Button className="update" onClick={this.takeMetoUpdate}> Update Profile </Button> */}
                   <Button className="signoutBtn" onClick={this.signMeOut}> Sign Out </Button>
                 </div>
               </div>
