@@ -18,10 +18,10 @@ class Register extends React.Component {
   };
   handlePassword = e => {
      e.preventDefault();
-     console.log("I am ")
      try{
+       const localurl = `http://localhost:5000/api/register`
       axios
-          .post('https://watermyplantsbe.herokuapp.com/api/register', this.state)
+          .post('https://watermyplantsbe.herokuapp.com/api/register' || localurl, this.state)
           .then(res => {
             console.log(res);
             console.log("You successfully Registered in");
@@ -31,8 +31,6 @@ class Register extends React.Component {
           console.log(err)
         }
     }
-
-
 
   render(){
     return(
@@ -86,7 +84,7 @@ const FormWrapper =styled.div`
       height: 100%;
 `
 const UserBar = styled.div`
-    box-shadow: 0px 4px 4px #007DA6;
+    box-shadow: 0px 2px 2px purple;
     text-align : center;
     width: 400px;
     border-radius: 5px;
@@ -99,7 +97,7 @@ const UserBar = styled.div`
           width : 300px;
           border-radius: 5px;
           border: none;
-          box-shadow: 0 2px 4px #272727;
+          box-shadow: 0 2px 4px purple;
           text-align:center;
           @media(max-width: 479px){
               width: 250px;

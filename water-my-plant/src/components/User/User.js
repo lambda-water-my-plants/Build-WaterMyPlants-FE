@@ -14,6 +14,20 @@ class User extends React.Component {
             password:''
         }
     }
+    componentDidMount() {
+        let id = localStorage.getItem(`id`)
+        const url = `https://watermyplantsbe.herokuapp.com/api/users/${id}`
+        this.setState({ id: id });
+        try {
+            axios
+                .get(url, { headers: { Authorization: localStorage.getItem("token") } })
+                .then(res => {
+                    this.setState({ username: res.data.username, email: res.data.email, phone: res.data.phone})
+                })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     handleInput = event => {
         event.preventDefault();
@@ -21,16 +35,18 @@ class User extends React.Component {
     };
 
     updateInfo = (data, id) => {
-        data = { name: this.state.name, email: this.state.email }
+        data = { username: this.state.username, email: this.state.email, password: this.state.password, phone: this.state.phone  }
         id = localStorage.getItem(`id`)
-        const url = `https://watermyplantsbe.herokuapp.com/api/users/${id}`
+        console.log(id)
+        const url = `https://watermyplantsbe.herokuapp.com/api/users/${id}` || `http://localhost:5000/api/users/${id}`
         try {
             axios
-                .put(url, data)
+                .put(url, data, { headers: { Authorization: localStorage.getItem("token") }})
                 .then(res => {
                     console.log(res);
-                    this.setState({ name: res.data.username, email: res.data.email })
+                    this.setState({ username: res.data.username, email: res.data.email, phone: res.data.phone, password: res.data.password })
                     alert("Your Update Submitted Successfully");
+                    console.log(res.data.phone);
                     this.props.history.push('/home');
                     window.location.reload(true);
                 })
@@ -40,7 +56,7 @@ class User extends React.Component {
     }
     deleteMyAccount = id => {
         id = localStorage.getItem(`id`)
-        const url = `https://watermyplantsbe.herokuapp.com/api/users/${id}`
+        const url = `https://watermyplantsbe.herokuapp.com/api/users/${id}` || `http://localhost:5000/api/users/${id}`
         alert("Your Account Will be deleted permanantly")
         try {
             axios
@@ -63,7 +79,7 @@ class User extends React.Component {
             <Wrapper>
                 <UserBar>
                   <div className ='loginform'>
-                    <form>
+                    <form onSubmit= {this.updateInfo}>
                         <input
                             className='input'
                             onChange={this.handleInput}
@@ -75,7 +91,7 @@ class User extends React.Component {
                             className='input'
                             type= 'password'
                             onChange={this.handleInput}
-                            placeholder="password"
+                            placeholder=" new password"
                             value={this.state.password}
                             name="password"
                         />
@@ -112,7 +128,7 @@ const Wrapper =styled.div`
       height: 100%;
 `
 const UserBar = styled.div`
-    box-shadow: 0px 4px 4px #007DA6;
+    box-shadow: 0px 2px 2px purple;
     text-align : center;
     width: 400px;
     border-radius: 5px;

@@ -48,7 +48,7 @@ const UserWrapper = styled.div`
       height: 100%;
 `
 const UserBar = styled.div`
-    box-shadow: 0px 4px 4px #007DA6;
+    box-shadow: 0px 2px 2px purple;
     text-align : center;
     width: 400px;
     border-radius: 5px;
