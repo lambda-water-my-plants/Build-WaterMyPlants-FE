@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Register from './components/Register/Register'
 import Login from './components/Login/Login';
-import User from './components/User/User.js';
+import UpdateUser from './components/User/User.js';
 import UserProfile from './components/User/UserProfile.js';
 import AddPlants from './components/Plants/Plants.js';
 import UserPlants from './components/Plants/UserPlants';
@@ -27,7 +27,7 @@ class App extends Component {
   }
   takeMetoUpdate = () =>{
     if(localStorage.getItem('token')) {
-      this.props.history.push("/user");
+      this.props.history.push("/updateuser");
       window.location.reload(true);
     } else{
       alert("Please Log in First");
@@ -62,7 +62,7 @@ class App extends Component {
           </NavDiv>
         <Route exact path="/login"     component={Login} />
         <Route exact path="/register"  component={Register} />
-        <Route path="/user" component={User} />
+        <Route path="/updateuser" component={UpdateUser} />
         <Route path="/myprofile" component={UserProfile} />
         <Route path="/addplants" component={AddPlants} />
         <Route path="/myplants" component={UserPlants} />
