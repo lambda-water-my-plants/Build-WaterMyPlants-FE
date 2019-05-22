@@ -7,10 +7,10 @@ import UserProfile from './components/User/UserProfile.js';
 import AddPlants from './components/Plants/Plants.js';
 import UserPlants from './components/Plants/UserPlants';
 import styled from "styled-components";
-import {Route, Link, BrowserRouter as Router} from 'react-router-dom';
+import {Route, Link, NavLink, BrowserRouter as Router} from 'react-router-dom';
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
         name: '',
     }
@@ -25,26 +25,18 @@ class App extends Component {
       alert("Please Log in First")
     }
   }
-  takeMetoUpdate = () =>{
-    if(localStorage.getItem('token')) {
-      this.props.history.push("/updateuser");
-      window.location.reload(true);
-    } else{
-      alert("Please Log in First");
-    }
-  }
   render() {
     return (
       <Router className="App">
-        <NavDiv className='this.state.token`'>
+        <NavDiv >
             <nav className="navBar" >
              <div>
-                  <Link className="dropbtn" to='/login'>Login</Link>
-                  <Link className="dropbtn" to="/register">Register</Link>
+                  <NavLink className="dropbtn" to='/login'>Login</NavLink>
+                  <NavLink className="dropbtn" to="/register">Register</NavLink>
                   <div className="dropdown">
                       <button className="dropbtn"> Plants</button>
                             <div className="dropdown-content">
-                              <Link to='/addplants'> Add Plants</Link>
+                              <NavLink to='/addplants'> Add Plants</NavLink>
                               <Link to='/myplants'> My All Plants</Link>
                               <Link to='/plantsbook'> Plants Book</Link>
                             </div>
