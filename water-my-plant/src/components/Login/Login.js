@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
+import { Route , Link,BrowserRouter as Router} from "react-router-dom";
 import axios from 'axios';
+import Register from '../Register/Register.js';
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,6 +35,7 @@ class Login extends React.Component {
 
   render(){
     return(
+      <Router>
         <FormWrapper>
           <UserBar>
             <Form  onSubmit={this.handlePassword} className ='loginform'>
@@ -54,10 +57,17 @@ class Login extends React.Component {
               />
 
               <Button className= "input" onClick={this.handlePassword}>Log in</Button>
+                  <p> Don't have an account ? </p>
+                  {/* <Link to="/register ">  Register Here</Link>  */}
+                      
+                <a href=" https://watermyplants.netlify.com/register">Register Here </a>
             </Form>
+            
           </UserBar>
        </FormWrapper>
-
+       
+       <Route  path="/register"  component={Register} />
+    </Router>
     );
   }
 }
@@ -76,6 +86,12 @@ const UserBar = styled.div`
     padding-top: 60px;
     padding-bottom: 60px;
     margin: 50px auto;
+    a{
+      text-decoration: none;
+    }
+    a:hover{
+      color: pink;
+    }
     .input{
           margin: 5px;
           height: 25px;
