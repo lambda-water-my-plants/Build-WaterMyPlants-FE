@@ -7,7 +7,7 @@ import UserProfile from './components/User/UserProfile.js';
 import AddPlants from './components/Plants/Plants.js';
 import UserPlants from './components/Plants/UserPlants';
 import styled from "styled-components";
-import {Route, Link, BrowserRouter as Router, withRouter} from 'react-router-dom';
+import {Route, Link, BrowserRouter as Router} from 'react-router-dom';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -73,7 +73,7 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;
 
 const NavDiv = styled.div`
   .navBar{
