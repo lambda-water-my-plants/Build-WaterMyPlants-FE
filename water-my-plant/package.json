@@ -13,7 +13,6 @@
     "redux": "^4.0.1",
     "styled-components": "^4.2.0"
   },
-  "proxy":  "https://watermyplants.netlify.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -23,10 +22,17 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "https://watermyplants.netlify.com"
 }
