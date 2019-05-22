@@ -7,14 +7,27 @@ import UserProfile from './components/User/UserProfile.js';
 import AddPlants from './components/Plants/Plants.js';
 import UserPlants from './components/Plants/UserPlants';
 import styled from "styled-components";
-import {Route, Link, NavLink, BrowserRouter as Router} from 'react-router-dom';
+import {Route, Link, BrowserRouter as Router} from 'react-router-dom';
 class App extends Component {
   constructor() {
     super();
     this.state = {
-        name: '',
+        showMenu: false,
     }
-}
+  }
+  showMenu=(e)=>{
+      this.setState({showMenu :true}, ()=>{
+        document.addEventListener('click', this.closeMenu);
+      })
+  }
+  closeMenu=(event)=>{
+    if (!this.dropdownMenu.contains(event.target)) { 
+      this.setState({ showMenu: false }, () => {
+        document.removeEventListener('click', this.closeMenu);
+      });  
+      
+    }
+  }
   signMeOut = () => {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
@@ -31,25 +44,29 @@ class App extends Component {
         <NavDiv >
             <nav className="navBar" >
              <div>
-                  <NavLink className="dropbtn" to='/login'>Login</NavLink>
-                  <NavLink className="dropbtn" to="/register">Register</NavLink>
+                  {/* <Link className="dropbtn" to='/login'>Login</Link> */}
+                  {/* <Link className="dropbtn" to="/register">Register</Link> */}
                   <div className="dropdown">
-                      <button className="dropbtn"> Plants</button>
-                            <div className="dropdown-content">
-                              <NavLink to='/addplants'> Add Plants</NavLink>
+                      <button onClick={this.showMenu} className="dropbtn"> Plants</button>
+                      {this.state.showMenu? (
+                            <div className="menu dropdown-content" ref={(element)=>{this.dropdownMenu = element;}}>
+                              <Link to='/addplants'> Add Plants</Link>
                               <Link to='/myplants'> My All Plants</Link>
                               <Link to='/plantsbook'> Plants Book</Link>
-                            </div>
+                            </div> 
+                      ) : (null) }
                   </div>
               </div>
-              <div className="dropdown">
-                <button className="dropbtn"> Menu</button>
-                <div className="dropdown-content">
+              <div  className="dropdown">
+                <button onClick ={this.showMenu} className="dropbtn"> Menu</button>
+                {this.state.showMenu? (
+                <div className="dropdown-content next">
                   <Link to='/myprofile'> My Profile</Link>
                   <Link to='/updateuser'> Update Profile </Link>
                   {/* <Button className="update" onClick={this.takeMetoUpdate}> Update Profile </Button> */}
                   <Button className="signoutBtn" onClick={this.signMeOut}> Sign Out </Button>
                 </div>
+                ) : (null)}
               </div>
             </nav>
           </NavDiv>
@@ -88,7 +105,7 @@ const NavDiv = styled.div`
     .dropbtn {
       text-align:center;
       text-decoration: none;
-      background-color: #D46A6A;
+      background-color: #2980B9;;
       color: white;
       padding: 16px;
       font-size: 14px;
@@ -102,19 +119,22 @@ const NavDiv = styled.div`
     }
 
     .dropdown {
-      position: relative;
+      // position: relative;
       display: inline-block;
     }
 
     .dropdown-content {
       text-align:center;
       display: none;
+      overflow:auto;
       position: absolute;
-      right: 0;
       background-color: grey;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
+    }
+    .dropdown-content.next{
+      right :0;
     }
 
     .dropdown-content a {
