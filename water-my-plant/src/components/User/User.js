@@ -9,7 +9,6 @@ class User extends React.Component {
         this.state = {
             username: '',
             email: '',
-            id: '',
             phone:'',
             password:''
         }
