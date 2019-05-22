@@ -2,8 +2,17 @@
 
 html, body, .app, #root {
   min-height: 100vh;
-  background: #007a4f;
+  /* background: #007a4f; */
   /* background: #930050; */
+  background-image: url("../src/image/plant.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 body {
